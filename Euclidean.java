@@ -1,23 +1,22 @@
 import java.util.*;
 
-public class Euclidean {
-    public static int gcd(int a, int b)
-    {
-        if (a == 0)
-            return b;
-
-        return gcd(b % a, a);
+class Euclidean{
+    public static int gcd(int a,int b){
+        int r1=a;
+        int r2=b;
+        while(r2>0){
+            int q = r1/r2;
+            int r = r1-q*r2;
+            r1=r2;
+            r2=r;
+        }     
+        return r1;
     }
-
-    public static void main(String[] args)
-    {
-        Scanner s = new Scanner(System.in);
-        System.out.println("Enter a:");
-        int a = s.nextInt();
-        System.out.println("Enter b:");
-        int b = s.nextInt();
-        int g = gcd(a,b);
-        System.out.println("GCD(" + a + " , " + b
-                           + ") = " + g);
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        int a=sc.nextInt();
+        int b=sc.nextInt();
+        System.out.println("GCD(a,b):"+gcd(a,b));
+        sc.close();
     }
 }
