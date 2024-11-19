@@ -249,8 +249,7 @@ public class HillCipher
         String key = in.next();
         double sq = Math.sqrt(key.length());
         if (sq != (long) sq)
-            System.out
-                    .println("Invalid key length!!! Does not form a square matrix...");
+            System.out.println("Invalid key length!!! Does not form a square matrix...");
         else
         {
             int s = (int) sq;
