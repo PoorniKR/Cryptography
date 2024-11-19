@@ -1,45 +1,41 @@
-import java.io.*;
-import java.math.*;
-import java.util.*;
-
 public class RSA {
-    public static double gcd(double a,double h){
-        double temp;
-        while(true){
-            temp = a%h;
-            if(temp==0){
-                return h;
-            }
-            a=h;
-            h=temp;
+    public static int gcd(int a, int b) {
+        while (b != 0) {
+            int temp = a % b;
+            a = b;
+            b = temp;
         }
-    }    
-    public static void main(String[] args){
-        Scanner scan=new Scanner(System.in);
-        System.out.println("Enter the prime no p and q:");
-        double p = scan.nextDouble();
-        double q = scan.nextDouble();
-        double n = p * q;
-        System.out.println("Enter e:");
-        double e = scan.nextDouble();
-        double phi = (p - 1) * (q - 1);
-        while (e < phi) {
-            if (gcd(e, phi) == 1)
-                break;
-            else
-                e++;
-        }
-        double k = Math.pow(e,-1);
-        double d = k % e;
-        System.out.println("Enter message:");
-        double msg = scan.nextDouble();
+        return a;
+    }
 
+    public static void main(String[] args) {
+        int p = 3;
+        int q = 7;
+
+        int n = p * q;
+
+        int phi = (p - 1) * (q - 1);
+
+        int e = 2;
+        while (gcd(e, phi) != 1) {
+            e++;
+        }
+
+        int d = 0;
+        for (int k = 1; k < phi; k++) {
+            if ((1 + k * phi) % e == 0) {
+                d = (1 + k * phi) / e;
+                break;
+            }
+        }
+
+        int msg = 12;
         System.out.println("Message data = " + msg);
-        double c = Math.pow(msg, e);
-        c = c % n;
+
+        int c = (int) (Math.pow(msg, e) % n);
         System.out.println("Encrypted data = " + c);
-        double m = Math.pow(c, d);
-        m = m % n;
+
+        int m = (int) (Math.pow(c, d) % n);
         System.out.println("Original Message Sent = " + m);
     }
 }
